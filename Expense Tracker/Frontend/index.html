@@ -6,30 +6,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Tracker</title>
-   
+    <link rel="stylesheet" href="main.css">
+
 </head>
+<div class="bg">
 
-<body>
-    <form onsubmit="saveToBackend(event)" action="/user/add-expense" method="POST">
-        <label for="amt">Expense Amount</label>
-        <input type="number" id="amt" name="expenseamt" required>
-        <label for="des">Description</label>
-        <input type="text" id="des" name="description" required>
-        <label for="cat">Choose a Category</label>
-        <select id="cat" name="category">
-            <option value="fuel">Fuel</option>
-            <option value="food">Food</option>
-            <option value="electricity">Electricity</option>
-            <option value="Misc">Miscellanous</option>
-            <option value="rent">Rent</option>
 
-        </select>
-        <button> Submit </button>
-    </form>
-    <ul id="allExpenses"></ul>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0/axios.min.js"></script>
-    <script src="index.js"></script>
+    <body class="body"><br><br><br><br><br><br><br><br>
+        <h1>Expense  Tracker </h1>
+        <div>
+            <fieldset>
 
-</body>
+                <form onsubmit="saveToBackend(event)" action="/user/add-expense" method="POST">
+                    <label for="amt" class="heading">Expense Amount</label><br>
+                    <input class="input1" type="number" id="amt" name="expenseamt" required><br>
+                    <label for="des" class="heading">Description</label><br>
+                    <input class="input1" type="text" id="des" name="description" required><br>
+                    <label for="cat" class="heading">Choose a Category</label><br>
+                    <select class="input2" id="cat" name="category"><br>
+                        <option value="fuel">Fuel</option>
+                        <option value="food">Food</option>
+                        <option value="electricity">Electricity</option>
+                        <option value="Misc">Miscellanous</option>
+                        <option value="rent">Rent</option>
+
+                    </select><br>
+                    <button class="btn"> Submit </button>
+                </form>
+                <ul id="allExpenses" class="list1"></ul>
+            </fieldset>
+        </div>
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0/axios.min.js"></script>
+        <script src="index.js"></script>
+
+    </body>
+</div>
 
 </html>

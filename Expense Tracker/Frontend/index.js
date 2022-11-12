@@ -6,9 +6,9 @@ async function saveToBackend(event) {
     const category = event.target.category.value;
 
     const obj = {
-        amount:amount,
-        description:description,
-        category:category
+        amount: amount,
+        description: description,
+        category: category
     }
 
     try {
@@ -26,37 +26,38 @@ function showNewReponseOnScreen(response) {
     document.getElementById("cat").value = " ";
 
     const parentNode = document.getElementById("allExpenses");
-    
-    const childHTML = `<li id=${response.id}>${response.expenseAmount}--${response.description}--${response.category}
-        <button onClick=editUser("${response.id}","${response.expenseAmount}","${response.description}","${response.category}")>Edit</button>
-                    <button onClick=deleteUser("${response.id}")>Delete</button></li>`
+
+    const childHTML = `<li id=${response.id} class="list">${response.expenseAmount}--${response.description}--${response.category}
+                    <button onClick=deleteUser("${response.id}") class="bttd">Delete</button>
+                    <button onClick=editUser("${response.id}","${response.expenseAmount}","${response.description}","${response.category}") class="btte">Edit</button>
+                    </li>`
 
 
     parentNode.innerHTML = parentNode.innerHTML + childHTML;
 
 }
 
- function editUser(responseId) {
-    
-    const url='http://localhost:8000/user/edit-expense/'+responseId;
+function editUser(responseId) {
+
+    const url = 'http://localhost:8000/user/edit-expense/' + responseId;
     axios.get(url)
-    .then((res)=>{
-        document.getElementById('amt').value =res.data.expenseAmount;
-        document.getElementById('des').value =res.data.description;
-        document.getElementById("cat").value = res.data.category;
-        deleteUser(responseId);
-    }
-        
-    )
-    .catch(err=>console.log(err))
+        .then((res) => {
+            document.getElementById('amt').value = res.data.expenseAmount;
+            document.getElementById('des').value = res.data.description;
+            document.getElementById("cat").value = res.data.category;
+            deleteUser(responseId);
+        }
+
+        )
+        .catch(err => console.log(err))
 
     // deleteUser(responseId);
 }
 
 async function deleteUser(responseId) {
     try {
-        
-        const url='http://localhost:8000/user/delete-expense/'+responseId;
+
+        const url = 'http://localhost:8000/user/delete-expense/' + responseId;
         await axios.post(url);
         removeUserFromScreen(responseId);
 
