@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(246, 198, 87);
+    color: rgb(223, 17, 17);
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+}
