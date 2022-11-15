@@ -81,3 +81,18 @@
     
     
 }
+.cart1{
+    font-size: 120%;
+    cursor: pointer;
+    height: 40px;
+    width: 150px;
+    position:relative;
+    left: 45%;
+    background-color: #7395ae;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: #100f0e;
+}
