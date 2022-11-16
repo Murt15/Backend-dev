@@ -2,7 +2,7 @@
     width: 800px;
     position: relative;
     left: 23%;
-
+    
 
 
 
@@ -68,31 +68,4 @@
     flex-wrap: wrap;
     justify-content: space-around;
 }
-.cart{
-    height: 40px;
-    width: 80px;
-    font-size: 150%;
-    position: relative;
-    left: 67%;
-    color: rgb(244, 236, 236);
-    background-color: #1a1a1d;
-    border: 1px solid white;
-    border-radius: 3px;
-    
-    
-}
-.cart1{
-    font-size: 120%;
-    cursor: pointer;
-    height: 40px;
-    width: 150px;
-    position:relative;
-    left: 45%;
-    background-color: #7395ae;
-    border: none;
-    border-radius: 5px;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    font-weight: bold;
-    color: #100f0e;
-}
+
