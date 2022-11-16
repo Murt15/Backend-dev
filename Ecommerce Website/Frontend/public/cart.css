@@ -165,3 +165,9 @@
     height: 30px;
     
 }   
+.totalPrice{
+    font-size: 150%;
+    display: block;
+    position: relative;
+    margin-left: 280px;
+}
