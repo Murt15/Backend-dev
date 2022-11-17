@@ -8,6 +8,7 @@ router.post('/cart/add-product',cartController.postProduct);
 
 router.get('/cart/get-products',cartController.getProduct);
 
+router.post('/cart/delete-product/:productid',cartController.postDeleteProducts)
 
 
 

@@ -1,13 +1,14 @@
 const Cart=require('../models/cart');
 
 exports.postProduct=((req,res,next)=>{
-    console.log(req.body)
+    //console.log(req.body)
+    const id=req.body.id;
     const title=req.body.title;
     const imageUrl=req.body.imageUrl;
     const price=req.body.price;
     const quantity=req.body.quantity;
 
-    Cart.create({title:title,imageUrl:imageUrl,price:price,quantity:quantity})
+    Cart.create({id:id,title:title,imageUrl:imageUrl,price:price,quantity:quantity})
     .then((result) => {
      res.json(result);
      //     res.json(result.dataValues);   
@@ -24,3 +25,16 @@ exports.getProduct=((req,res,next)=>{
     console.log(err)
   });
 })
+
+exports.postDeleteProducts=((req,res,next)=>{
+  
+  const productid=req.params.productid
+  Cart.findByPk(productid)
+  .then(val=>{
+    return val.destroy();
+  }).then(result=>{
+    console.log('Destroyed Product From Cart')
+    res.json();
+  }).catch(err=>console.log(err));
+})
+
