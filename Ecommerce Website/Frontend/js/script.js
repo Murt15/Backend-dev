@@ -5,13 +5,51 @@ var totalPrice = 0.00;
 
 
 function popNotification(event) {
-    if (event.target.id === 'shop-btn') {
-        const parentDiv = event.target.parentElement.parentElement;
-        // console.log(parentDiv.children)
-        const title = parentDiv.children[0].innerText
-        const img = parentDiv.children[1].children[0].src
-        const price = parentDiv.children[2].children[0].innerText
 
+    if (event.target.id === 'shop-btn') {
+
+
+        const parentDiv = event.target.parentElement.parentElement;
+        const title = parentDiv.children[0].innerText
+        const imageUrl = parentDiv.children[1].children[0].src
+        const price = parentDiv.children[2].children[0].children[0].innerText
+        const quantity=1;
+
+        const cart={
+            title:title,imageUrl:imageUrl,price:price,quantity:quantity
+        }
+
+        axios.post("http://localhost:5555/cart/add-product",cart)
+        .then((data)=>{
+            // console.log(data.data);
+            var parentNode = document.getElementById("cart-details");
+            var childHTML = `<li class="cart-details-li" id=${data.data.id}>
+                            <span class="cart-details-img"><img src="${data.data.imageUrl}" alt=""></span>
+                            <span class="cart-details-title cart-col">${data.data.title}</span>
+                            <span class="cart-details-price cart-col">${data.data.price}</span>
+                            <input  class="cart-details-number" type="number" value="${data.data.quantity}">
+                            <button id="remove-btn" class="cart-details-btn" type="submit">Remove</button>
+                            </li>`
+            parentNode.innerHTML = parentNode.innerHTML + childHTML;
+    
+        })
+        .catch(err=>console.log(err))
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+        // console.log(parentDiv.children)
+       
         const container = document.getElementById("notificationContainer");
         const notif = document.createElement("div");
         notif.classList.add("notification");
@@ -26,16 +64,7 @@ function popNotification(event) {
 
 
         //Adding Products in Cart
-        var parentNode = document.getElementById("cart-details");
-        var childHTML = `<li class="cart-details-li" id=${title}>
-                        <span class="cart-details-img"><img src="${img}" alt=""></span>
-                        <span class="cart-details-title cart-col">${title}</span>
-                        <span class="cart-details-price cart-col">${price}</span>
-                        <input  class="cart-details-number" type="number">
-                        <button id="remove-btn" class="cart-details-btn" type="submit">Remove</button>
-                        </li>`
-        parentNode.innerHTML = parentNode.innerHTML + childHTML;
-
+       
 
         //Adding Total Price
         const total=document.getElementById("total-price")
@@ -86,7 +115,7 @@ function popupCart(event) {
     }
 
 }
-
+//////////Backend Part
 window.addEventListener('DOMContentLoaded',(data)=>{
     axios.get('http://localhost:5555/products/music')
     .then((Music) => {
@@ -135,4 +164,24 @@ window.addEventListener('DOMContentLoaded',(data)=>{
     .catch((err)=>{
         console.log(err);
     })
+    axios.get('http://localhost:5555/cart/get-products')      
+    .then((Products)=>{
+        Products.data.forEach((data)=>{
+            var parentNode = document.getElementById("cart-details");
+            var childHTML = `<li class="cart-details-li" id=${data.id}>
+                            <span class="cart-details-img"><img src="${data.imageUrl}" alt=""></span>
+                            <span class="cart-details-title cart-col">${data.title}</span>
+                            <span class="cart-details-price cart-col">${data.price}</span>
+                            <input  class="cart-details-number" type="number" value="${data.quantity}">
+                            <button id="remove-btn" class="cart-details-btn" type="submit">Remove</button>
+                            </li>`
+            parentNode.innerHTML = parentNode.innerHTML + childHTML;
+        })
+       
+
+    }).catch(err=>console.log(err));
+
+
+
 });
+
