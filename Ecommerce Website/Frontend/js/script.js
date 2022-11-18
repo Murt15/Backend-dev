@@ -1,10 +1,33 @@
+const mparentNode=document.getElementById("merch-container")
 
+const parentNode=document.getElementById("musicContainer");
 
+const order=document.getElementById("purchase-now");
+
+const cart = document.getElementById("cart-details")
+
+order.addEventListener('click',placeOrder)
+
+cart.addEventListener('click', removeFromCart)
+
+const pagination=document.getElementById("pagination");
+// Event Listener For refreshing the Page
 window.addEventListener('DOMContentLoaded',(data)=>{
-    axios.get('http://localhost:5555/products/music')
+    const page=1;
+    getProducts(page);
+    
+});
+
+
+function getProducts(page){
+    parentNode.innerHTML='';
+    mparentNode.innerHTML='';
+    axios.get(`http://localhost:5555/products/music/?page=${page}`)
     .then((Music) => {
-        Music.data.forEach(data => {
-            var parentNode=document.getElementById("musicContainer");
+        // console.log(Music.data);
+        //console.log(Music.data.data);
+        Music.data.data.forEach(data => {
+            
             var childHTML=` <div class="box" id="${data.id}">
                                 <h3 class="h3">${data.title}</h3>
                                 <div class="img-cont">
@@ -17,15 +40,19 @@ window.addEventListener('DOMContentLoaded',(data)=>{
                                     <button class="shop-btn" id="shop-btn" type='button'>ADD TO CART</button>
                                 </div>
                             </div>`
-            parentNode.innerHTML = parentNode.innerHTML + childHTML;                
+            parentNode.innerHTML = parentNode.innerHTML + childHTML;
+            showPagination(Music.data.currentPage,Music.data.hasNextPage,Music.data.hasPreviousPage,Music.data.lastPage,Music.data.nextPage,Music.data.previousPage)
         });
+        
+            
     }).catch((err) => { 
         console.log(err)
     });
-    axios.get('http://localhost:5555/products/merch')
+    axios.get(`http://localhost:5555/products/merch/?page=${page}`)
     .then((Merch)=>{
-        Merch.data.forEach(data=>{
-        var parentNode=document.getElementById("merch-container")
+        //console.log(Merch.data.data)
+        Merch.data.data.forEach(data=>{
+        
         var childHTML=`<div class="box" id="${data.id}">
                             <h3 class="h3">${data.title}</h3>
                             <div class="img-cont">
@@ -41,8 +68,8 @@ window.addEventListener('DOMContentLoaded',(data)=>{
         
         
 
-        parentNode.innerHTML = parentNode.innerHTML + childHTML;
-
+        mparentNode.innerHTML = mparentNode.innerHTML + childHTML;
+        //    showPagination(Merch.data); 
         })
     })
     .catch((err)=>{
@@ -70,11 +97,7 @@ window.addEventListener('DOMContentLoaded',(data)=>{
         
 
     }).catch(err=>console.log(err));
-
-
-
-});
-
+}
 
 function popNotification(event) {
 
@@ -143,11 +166,6 @@ function popNotification(event) {
 }
 
 //Remove From Screen and delete From backend
-
-const cart = document.getElementById("cart-details")
-
-cart.addEventListener('click', removeFromCart)
-
 function removeFromCart(event) {
     if (event.target.id === 'remove-btn') {
         
@@ -180,4 +198,53 @@ function popupCart(event) {
 
 }
 
+function showPagination(currentPage,hasNextPage,hasPreviousPage,lastPage,nextPage,previousPage){
+    pagination.innerHTML='';
 
+    if(hasPreviousPage){
+        const button2 = document.createElement('button');
+        //button2.classList.add('active');
+        button2.innerHTML = previousPage;
+        button2.addEventListener('click', ()=>getProducts(previousPage));
+        pagination.appendChild(button2);
+
+    }
+
+
+
+    const button1 = document.createElement('button');
+    //button1.classList.add('active');
+    button1.innerHTML = `<h3>${currentPage}<h3>`;
+    
+    button1.addEventListener('click', ()=>getProducts(currentPage))
+    pagination.appendChild(button1);
+
+    if(hasNextPage){
+        const button3 = document.createElement('button');
+        button3.classList.add('active');
+        button3.innerHTML = nextPage;
+        button3.addEventListener('click',()=>getProducts(nextPage))
+        pagination.appendChild(button3);
+    }
+    // // if(lastPage!==currentPage && nextPage !==lastPage){
+    // //     const button4 = document.createElement('button');
+    // //     button4.classList.add('active');
+    // //     button4.innerHTML = nextPage;
+    // //     button4.addEventListener('click',()=>getProducts(lastPage))
+    // //     pagination.appendChild(button4);
+    // // }
+}
+
+function placeOrder(event){
+    axios.get("http://localhost:5555/cart/get-products")
+    .then((Products)=>{
+
+
+        var totalPrice=0;
+        const total=document.getElementById("total-price");
+        totalPrice = totalPrice + data.price;
+        total.innerText = `Total: $${totalPrice}`;
+    })
+    .catch()
+    
+}
