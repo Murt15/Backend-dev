@@ -171,3 +171,19 @@
     position: relative;
     margin-left: 280px;
 }
+.paginationClass{
+    text-align: center;
+    
+    
+}
+.paginationClass button{
+    background-color: #1336e6;
+    border: none;
+    margin: 0.5rem;
+    border-radius: 4px;
+    width: 25px;
+    border: 2px solid black;
+}
+.paginationClass button:hover{
+    background-color: white;
+}

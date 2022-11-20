@@ -38,24 +38,27 @@
 
         </ul>
         <span class="totalPrice" id="total-price"></span>
-        <button class="purchase" id="purchase">Purchase</button>
+        <div id="class-pagination" class="paginationClass"></div>
+        <button class="purchase" id="purchase-id">Purchase</button>
+       
     </section>
+    
 
     <div class="header-div" id="header-div-shop">
 
         
         <h1>The Generics</h1>
-        <div onclick="popNotification(event)">
+        <div onclick="addtoCart(event)">
             <section class="music-container">
                 <h2>MUSIC</h2>
                 <div class="music-container1" id="musicContainer">
                 </div>
             </section>
-            <section class="merch-container">
+            <!-- <section class="merch-container">
                 <h2>MERCH</h2>
                 <div class="merch-container1" id="merch-container">
                 </div>
-            </section>
+            </section> -->
         </div>
         <div id="pagination" class="pagination"></div>
         <div id="notificationContainer"></div>
@@ -82,6 +85,7 @@
         </footer>
     </div>
 </body>
+<script src="../js/order.js"></script>
 <script src="../js/script.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0/axios.min.js"></script>
 

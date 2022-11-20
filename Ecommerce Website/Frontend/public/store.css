@@ -2,7 +2,7 @@
     width: 800px;
     position: relative;
     left: 23%;
-    
+
 
 
 
@@ -44,7 +44,7 @@
     width: 800px;
     position: relative;
     left: 23%;
-    
+
 
 }
 
@@ -55,7 +55,7 @@
 }
 
 .h3 {
-   text-align: center;
+    text-align: center;
 }
 
 .music-container1 {
@@ -63,17 +63,20 @@
     flex-wrap: wrap;
     justify-content: space-around;
 }
-.merch-container1{
+
+.merch-container1 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
-.pagination{
+
+.pagination {
     text-align: center;
-    
-    
+
+
 }
-.pagination button{
+
+.pagination button {
     background-color: #e64a1f;
     border: none;
     margin: 0.5rem;
@@ -81,6 +84,7 @@
     width: 25px;
     border: 2px solid black;
 }
-.pagination button:hover{
+
+.pagination button:hover {
     background-color: white;
 }
