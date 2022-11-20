@@ -198,7 +198,7 @@ exports.getAllOrders = async (req, res, next) => {
 
         const orderDetails = await orderMusic.findAll( { where: {orderId: orders[i].id } } );
         const productsArray = [];
-
+        
         for(let j = 0; j < orderDetails.length; j++) {
 
             const musicId = orderDetails[j].dataValues.musicId;
@@ -206,11 +206,13 @@ exports.getAllOrders = async (req, res, next) => {
             const product = await Music.findByPk(musicId);
 
             productsArray.push(product);
+
+            //console.log(orders[i].id)
             //console.log(product);
         }
-
+        
         ordersArray.push(productsArray);
-       
+       //res.json({orderid:orders[i].id})
         
     }
     // console.log(ordersArray)

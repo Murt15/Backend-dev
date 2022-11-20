@@ -8,27 +8,25 @@ window.addEventListener('DOMContentLoaded',()=>{
 })
 
 
-
-
-
-
-
-
-
-
 function getOrder(){
     axios.get("http://localhost:5555/cart/get-productsforOrder")
     .then((data)=>{
-        console.log(data.data);
-        
-        for(let i=0;i<data.data.length;i++){
+        console.log(data);
+        let prodid=data.data.length;
+        for(let i=data.data.length-1;i>=0;i--){
+            
             let totalPriceforOrder=0;
             // console.log(data.data[i]);
             const section=document.createElement('div')
+            const div=document.createElement('div')
+            div.className=("div-order-cart");
             section.className=("orderDetails");
             section.id=("order-details");
             oparentNode.appendChild(section);
-            let body=document.getElementById("order-details");
+            let heading=`<h2>ProductID:${prodid}</h2><br></br>`
+            prodid--;
+            section.innerHTML+=heading;
+            section.appendChild(div);
             const ul=document.createElement('ul')
             ul.className="div-order-cart";
             
@@ -36,28 +34,17 @@ function getOrder(){
 
              for(let j=0;j<data.data[i].length;j++)
              {
-                console.log(data.data[i][j])
+                //console.log(data.data[i][j])
                 totalPriceforOrder=totalPriceforOrder+data.data[i][j].price
-                childHTML=`<li class="order-item-list"><img src=${data.data[i][j].imageUrl} alt="">${data.data[i][j].title}</li>`
-                ul.innerHTML=ul.innerHTML+childHTML;
+                let items=`<li class="order-item-list"><img src=${data.data[i][j].imageUrl} alt="">${data.data[i][j].title}</li>`
+                div.innerHTML+=items;
                 
              }
-              
-            childHTML=`<h2>ProductID</h2><br></br>
-            <h3>Total Order Value:${totalPriceforOrder}</h3>`
+            
+            childHTML=`
+            <h3>Total Order Value: $${totalPriceforOrder}</h3>`
             section.innerHTML=section.innerHTML+childHTML;
-
-             
-             
-            //  section.innerHTML=``
-            //  oparentNode.appendChild(section);
-            // childHTML=`<h3>Total Order Value:${totalPriceforOrder}</h3>`
-
-            // section.innerHTML=section.innerHTML+childHTML;
-
-            
-
-            
+           
         }
 
 
