@@ -2,15 +2,11 @@
     height: 40px;
     width: 80px;
     font-size: 150%;
-    position: relative;
-    left: 60%;
     color: rgb(244, 236, 236);
     background-color: #1a1a1d;
     border: 1px solid white;
     border-radius: 3px;
-    
-    
-    
+    margin-right: 15px;
 }
 .cart:hover,.cart:active{
     background-color:rgba(246, 241, 241, 0.1) ;

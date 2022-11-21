@@ -1,7 +1,8 @@
 .music-container {
     width: 800px;
-    position: relative;
-    left: 23%;
+    margin-left: auto;
+    margin-right: auto;
+   
 
 
 
@@ -11,8 +12,7 @@
 
 .music-container h2 {
     font-family: 'Kaushan Script', cursive;
-    position: relative;
-    left: 45%;
+   text-align: center;
 }
 
 .img-cont {
@@ -22,9 +22,11 @@
 .product-imgs {
     height: 300px;
     width: 300px;
+    border-radius: 25px;
 }
 
 .product-details {
+    font-size: 120%;
     margin-top: 15px;
     width: 300px;
 }
@@ -34,7 +36,7 @@
     float: right;
     background-color: #b1a296;
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
     width: 100px;
     height: 35px;
 }

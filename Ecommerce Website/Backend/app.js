@@ -23,26 +23,25 @@ const Orders=require('./models/order');
 const orderMusic=require('./models/orderMusic')
 
 const app=express();
-//RelationShip
 
-// One to Many Relationship
-Music.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
-User.hasMany(Music);
+const errorController=require('./Controllers/error');
+//RelationShip
 
 // One to One Relationship
 User.hasOne(Cart);
 Cart.belongsTo(User);
 
-// Many to Many Relationship
-Cart.belongsToMany(Music, {through: CartMusic});
-Music.belongsToMany(Cart, {through: CartMusic});
 // One to Many Relationship
 Orders.belongsTo(User , { constraints: true, onDelete: 'CASCADE' });
 User.hasMany(Orders);
+Music.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
+User.hasMany(Music);
 
 // Many to Many Relationship
 Orders.belongsToMany(Music, {through: orderMusic});
 Music.belongsToMany(Orders, {through: orderMusic});
+Cart.belongsToMany(Music, {through: CartMusic});
+Music.belongsToMany(Cart, {through: CartMusic});
 
 
 
@@ -50,6 +49,7 @@ app.use(bodyParser.json({ extended: false }));
 app.use(cors());
 app.use(storeRoutes);
 app.use(cartRoutes);
+app.use(errorController.get404);
 
 
 let tempUser;

@@ -125,6 +125,7 @@ exports.postdeleteProduct = (req, res, next) => {
         })
     
 }
+
 exports.postOrder = async (req, res, next) => {
 
     // From Carts table we get cartID based on userID
@@ -177,22 +178,19 @@ exports.postOrder = async (req, res, next) => {
     } catch(err) {
 
         console.log(err);
-        res.json({sucess: false});
+        
     }
 
 }
-exports.getAllOrders = async (req, res, next) => {
 
-    const user = await Users.findByPk(1);
+exports.getAllOrders = async (req, res, next) => {
+    try {
+        const user = await Users.findByPk(1);
 
     // orders will be an array
     const orders = await user.getOrders();
 
     const ordersArray = [];
-
-    // [order1 = [prod1, prod2, prod3], 
-    //  order2 = [prod1, prod2, prod3], 
-    //  order3 = [prod1, prod2, prod3]]
 
     for(let i = 0; i < orders.length; i++) {
 
@@ -217,6 +215,11 @@ exports.getAllOrders = async (req, res, next) => {
     }
     // console.log(ordersArray)
     res.json(ordersArray);
+    } catch (err) {
+        console.log(err);
+    }
+
+    
     
     
 }

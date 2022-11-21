@@ -10,6 +10,10 @@ cart.addEventListener('click', removeFromCart)
 
 const pagination=document.getElementById("pagination");
 
+const order=document.getElementById('purchase-id')
+
+order.addEventListener('click',placeOrder)
+
 const cpagination=document.getElementById("class-pagination");
 // Event Listener For refreshing the Page
 window.addEventListener('DOMContentLoaded',(data)=>{
@@ -48,6 +52,7 @@ function getProducts(page){
         
             
     }).catch((err) => { 
+        
         console.log(err)
     });
     // mparentNode.innerHTML='';
@@ -262,9 +267,7 @@ function showCartPagination(currentPage,hasNextPage,hasPreviousPage,lastPage,nex
     }
   
 }
-const order=document.getElementById('purchase-id')
 
-order.addEventListener('click',placeOrder)
 function placeOrder(event){
     axios.post(`http://localhost:5555/cart/postOrder`)
     .then(res=>{
@@ -281,17 +284,3 @@ function placeOrder(event){
 }
 
         
-
-//         <section id="order-details" class="orderDetails">
-            
-//             <div class=>
-//                 <li class="order-item-list"><img
-//                         src="https://i.pinimg.com/originals/41/a0/59/41a0593ec5c6562e838f349aba5ae9ef.jpg" alt="">Album
-//                     1</li>
-//                 <li class="order-item-list"><img
-//                         src="https://www.designformusic.com/wp-content/uploads/2016/04/orion-trailer-music-album-cover-design.jpg"
-//                         alt=""> Album 2</li>
-
-//             </div>
-            
-//         </section>
