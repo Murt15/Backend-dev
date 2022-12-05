@@ -51,6 +51,11 @@ app.use(cors());
 app.use(storeRoutes);
 app.use(cartRoutes);
 
+// app.use((req,res)=>{
+//   console.log(req.url);
+//   res.sendFile(path.join(__dirname,`../Frontend/${req.url}`))
+// })
+
 
 let tempUser;
 sequelize
