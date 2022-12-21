@@ -6,13 +6,15 @@ class Product {
     this.price=price;
     this.description=description;
     this.imageUrl=imageUrl;
-    this._id=_id?new mongoDb.ObjectId(this._id):null;
+    this._id=_id?new mongoDb.ObjectId(_id):null;
     this.userId=userId;
   }
   save(){
     const db=getDb();
     let dbOp;
-    if(this._id){
+
+    //console.log(this)
+    if(this._id){console.log("--------------")
       dbOp=db
       .collection('products')
       .updateOne({_id:this._id} , {$set:this});
@@ -20,15 +22,11 @@ class Product {
       dbOp=db.collection('products').insertOne(this);   
     }
      return dbOp
-    .then((result) => {
-      //console.log(result)
-      //return result;
-    }).catch((err) => {
-      console.log(err);
-    });
     
     
   }
+
+  
   static findAll() {
     const db = getDb();
     return db

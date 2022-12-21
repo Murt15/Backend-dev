@@ -14,7 +14,7 @@ exports.postAddProduct = (req, res, next) => {
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
-  const product=new Product(title,price,description,imageUrl);
+  const product=new Product(title,price,description,imageUrl,null,req.user._id);
   // req.user
   //   .createProduct({
   //     title: title,
@@ -23,7 +23,7 @@ exports.postAddProduct = (req, res, next) => {
   //     description: description
   //   })
     product.save().then(result => {
-       console.log(result);
+      //console.log(result);
       console.log('Created Product');
       res.redirect('/admin/products');
     })
@@ -61,9 +61,11 @@ exports.postEditProduct = (req, res, next) => {
   const updatedPrice = req.body.price;
   const updatedImageUrl = req.body.imageUrl;
   const updatedDesc = req.body.description;
- 
-  const product=new Product (updatedTitle,updatedPrice,updatedDesc,updatedImageUrl,prodId,null,req.user._id);
+  //console.log(prodId);
+  const product=new Product (updatedTitle,updatedPrice,updatedDesc,updatedImageUrl,prodId,req.user._id);
+  //console.log(product);
     product.save().then(result => {
+      console.log(result);
       console.log('UPDATED PRODUCT!');
       res.redirect('/admin/products');
     })
